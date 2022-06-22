@@ -13,10 +13,10 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@ctrl/tinycolor": "^3.4.1",
     "@quasar/extras": "^1.0.0",
     "quasar": "^2.6.0",
     "vue": "^3.0.0",
-    "vue-gpickr": "https://github.com/EdwinHoksberg/vue-gpickr.git#feature/vue-3-support",
     "vue-router": "^4.0.0",
     "vue3-resize-text": "^0.1.0"
   },

@@ -9,11 +9,11 @@
       </div>
     </div>
     <div class="q-pa-lg help-text text-h5 text-center">
-      Generate a funky looking gradient outlined text in pure CSS.<br/>
+      Generate a funky looking gradient outlined text in pure CSS.<br />
       Tweak the knobs, then copy the resulting CSS.
     </div>
-    <div class="row full-width items-top justify-center q-gutter-md q-mt-lg">
-      <q-card>
+    <div class="row full-width items-top justify-center q-gutter-md q-my-lg">
+      <q-card flat bordered>
         <q-card-section class="text-subtitle2">Gradient From</q-card-section>
         <q-separator />
         <q-card-section>
@@ -24,7 +24,7 @@
           in the background. Change it to something lighter.
         </q-card-section>
       </q-card>
-      <q-card>
+      <q-card flat bordered>
         <q-card-section class="text-subtitle2">Gradient To</q-card-section>
         <q-separator />
         <q-card-section>
@@ -35,14 +35,14 @@
           in the background. Change it to something lighter.
         </q-card-section>
       </q-card>
-      <q-card>
+      <q-card flat bordered>
         <q-card-section class="text-subtitle2">Background</q-card-section>
         <q-separator />
         <q-card-section>
           <q-color no-header v-model="bgColor" class="colorPicker" />
         </q-card-section>
       </q-card>
-      <q-card style="min-width: 250px">
+      <q-card flat bordered style="min-width: 250px">
         <q-card-section class="text-subtitle2">Settings</q-card-section>
         <q-separator />
         <q-card-section class="row q-px-lg">
@@ -63,21 +63,40 @@
         </q-card-section>
       </q-card>
     </div>
-    <q-card class="q-mt-lg css-card">
-      <q-card-section class="text-subtitle2">Resulting CSS</q-card-section>
-      <q-separator />
-      <q-card-section>
-        <pre><code>{{css}}</code></pre>
-      </q-card-section>
-    </q-card>
+    <div class="q-mt-lg css-card">
+      <q-bar dark class="bg-primary text-white">
+        <div class="col text-center">
+          <span class="text-weight-bold">CSS Code</span> &mdash; Copy this CSS
+          into your project
+        </div>
+      </q-bar>
+      <div class="css-preview">
+        <pre
+          v-highlightjs
+        ><code class="css">body { /* Or any other container you choose */
+  background-color: {{bgColor}};
+}
+
+{{css}}</code></pre>
+      </div>
+    </div>
+
     <component :is="'style'">{{ css }}</component>
 
     <q-separator spaced />
 
     <div class="text-center q-pa-lg">
-      Made in <a href="https://en.wikipedia.org/wiki/Valencia">Valencia</a> with
-      ❤️ and 🥘 by <a href="https://prealfa.com">Adrià López</a>
+      <p>
+        Made in
+        <a href="https://en.wikipedia.org/wiki/Valencia">Valencia</a> with ❤️
+        and 🥘 by <a href="https://prealfa.com">Adrià López</a>
+      </p>
+      <p>
+        Technique <em>respectfully stolen</em> from
+        <a href="https://www.youtube.com/watch?v=GVSjW0f5IC0">Scott Tolinski</a>
+      </p>
     </div>
+    <div class="text-center q-pa-lg"></div>
   </q-page>
 </template>
 
@@ -137,31 +156,33 @@ const shadowCss = computed(() => {
   ];
 
   return square
-    .map(([x, y]) => `${x * thickness.value}px ${y * thickness.value}px 0 #fff`)
-    .join(',\n' + Array(17).fill(' ').join(''));
+    .map(
+      ([x, y]) =>
+        `${x * thickness.value < 0 ? '' : ' '}${x * thickness.value}px ${
+          y * thickness.value < 0 ? '' : ' '
+        }${y * thickness.value}px 0 #fff`
+    )
+    .join(',\n' + Array(15).fill(' ').join(''));
 });
 
 const css = computed(() => {
-  return `
-  .text-gradient-outline {
-    color: ${bgColor.value};
-    text-shadow: ${shadowCss.value};
-    position: relative;
-    display: inline-block;
-    background-clip: text;
-  }
+  return `.text-gradient-outline {
+  color: ${bgColor.value};
+  position: relative;
+  display: inline-block;
+  text-shadow: ${shadowCss.value};
+}
 
-  .text-gradient-outline:after {
-    content: '';
-    background: ${gradientCss.value};
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    mix-blend-mode: darken;
-  }
-  `;
+.text-gradient-outline:after {
+  content: '';
+  background: ${gradientCss.value};
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  mix-blend-mode: darken;
+}`;
 });
 </script>
 
@@ -175,11 +196,16 @@ const css = computed(() => {
   max-width: 200px;
 }
 .css-card {
+  border-radius: 8px;
+  overflow: hidden;
   width: 100%;
   max-width: 768px;
-  pre {
-    max-width: 100%;
-    overflow-x: auto;
+  .css-preview {
+    pre {
+      margin: 0;
+      max-width: 100%;
+      overflow-x: auto;
+    }
   }
 }
 .preview-wrapper {

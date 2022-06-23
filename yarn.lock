@@ -1634,6 +1634,11 @@ he@^1.2.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
+highlight.js@^10.3.2:
+  version "10.7.3"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
+  integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
+
 html-minifier@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-4.0.0.tgz#cca9aad8bce1175e02e17a8c33e46d8988889f56"
@@ -2834,6 +2839,13 @@ vue-router@^4.0.0:
   integrity sha512-JcO7cb8QJLBWE+DfxGUL3xUDOae/8nhM1KVdnudadTAORbuxIC/xAydC5Zr/VLHUDQi1ppuTF5/rjBGzgzrJNA==
   dependencies:
     "@vue/devtools-api" "^6.0.0"
+
+vue3-highlightjs@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/vue3-highlightjs/-/vue3-highlightjs-1.0.5.tgz#10b8e2f2f64873dad0abfad6a8a19106d54f3dc9"
+  integrity sha512-Q4YNPXu0X5VMBnwPVOk+IQf1Ohp9jFdMitEAmzaz8qVVefcQpN6Dx4BnDGKxja3TLDVF+EgL136wC8YzmoCX9w==
+  dependencies:
+    highlight.js "^10.3.2"
 
 vue3-resize-text@^0.1.0:
   version "0.1.0"
